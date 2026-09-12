@@ -29,7 +29,7 @@ The project incorporates modern backend development practices, including passwor
 1. **Clone Repository:**
    ```bash
    git clone https://github.com/yourusername/backend-pgdb.git
-   cd backend-orcl
+   cd backend-pgdb
    
    ```
 2. **Install dependencies:**
