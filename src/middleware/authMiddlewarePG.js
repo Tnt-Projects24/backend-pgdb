@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import oracledb from "oracledb";
-import { getDBConnection } from "../config/database.js";
+//import oracledb from "oracledb";
+import { prisma } from "../config/pgdb.js";
 
 export const authMiddleware = async (req, res, next) => {
 
@@ -39,6 +39,7 @@ export const authMiddleware = async (req, res, next) => {
 
         // Get user ID from JWT
         const userId = decoded.id;
+        console.log(`user id ${userId}`);
 
         if (!userId) {
             return res.status(401).json({
@@ -47,38 +48,15 @@ export const authMiddleware = async (req, res, next) => {
         }
 
         // Connect to database
-        connection = await getDBConnection();
+        const user = await prisma.user.findUnique({
+           where: {id: userId }
+        });
 
-        // Verify user exists
-        const result = await connection.execute(
-            `
-            SELECT
-                id,
-                name,
-                email
-            FROM app_users
-            WHERE id = :userId
-            `,
-            {
-                userId
-            },
-            {
-                outFormat: oracledb.OUT_FORMAT_OBJECT
-            }
-        );
-
-        // User doesn't exist
-        if (result.rows.length === 0) {
-            return res.status(401).json({
-                error: "Not authorized; user does not exist"
-            });
+        if (! user) {
+            return res.status(401).json({error: "Error - user doesn;t exist"});
         }
-
-        // Attach user to request
-        req.user = result.rows[0];
-
-        console.log("Authenticated user:", req.user);
-
+       
+        req.user = user;
         // Continue to controller
         next();
 
@@ -105,8 +83,5 @@ export const authMiddleware = async (req, res, next) => {
 
     } finally {
 
-        if (connection) {
-            await connection.close();
-        }
     }
 };

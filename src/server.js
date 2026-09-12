@@ -1,17 +1,20 @@
 import { config } from "dotenv";
 import express from "express";
 
+// import {
+//     connectDB,
+//     disconnectDB
+// } from "./config/database.js";
+
 import {
     connectDB,
     disconnectDB
-} from "./config/database.js";
-
+} from "./config/pgdb.js";
 import movieRoutes from "./routes/movieRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import watchListRoutes from "./routes/watchListRoutes.js";
 
 config();
-
 
 const app = express();
 

@@ -1,18 +1,19 @@
 import express from "express";
 
-import { authMiddleware } from "../middleware/authMiddleware.js";
+import { authMiddleware } from "../middleware/authMiddlewarePG.js";
 import { validateRequest } from "../validators/validateRequests.js";
 import { addtoWatchListItemSchema } from "../validators/watchlistValidators.js";
 
 import {
-    getWatchlist,
+   // getWatchlist,
     addToWatchlist,
-    removeFromWatchlist
-} from "../controllers/watchlistController.js";
+    removeFromWatchlist,
+    updateWatchlistItem
+} from "../controllers/watchlistControllerPG.js";
 
 const router = express.Router();
 
-router.get("/:userId", getWatchlist);
+//router.get("/:userId", getWatchlist);
 
 router.post(
     "/",
@@ -21,6 +22,7 @@ router.post(
     addToWatchlist
 );
 
-router.delete("/:id", removeFromWatchlist);
+router.delete("/:id", authMiddleware,removeFromWatchlist);
+router.put("/:id", authMiddleware,updateWatchlistItem);
 
 export default router;

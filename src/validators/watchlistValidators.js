@@ -1,23 +1,18 @@
 import { z } from "zod";
 
-const WatchlistStatus = z.enum([
-    "PLANNED",
-    "WATCHING",
-    "COMPLETED",
-    "DROPPED"
-]);
+//const WatchlistStatus = z.enum(["PLANNED", "WATCHING", "COMPLETED", "DROPPED"]);
+//const WatchlistStatus = z.enum([1,2,3,4]);
 
 export const addtoWatchListItemSchema = z.object({
-    movieId: z.number().int().positive(),
-
-    status: WatchlistStatus,
-
-    rating: z.coerce
-        .number()
-        .int("Must be an integer")
-        .min(1, "Rating must be between 1 and 10")
-        .max(10, "Rating must be between 1 and 10")
-        .optional(),
-
-    notes: z.string().max(2000).optional()
+  movieId: z.string().uuid(),
+  statusId:  z.coerce
+    .number()
+    .int("Must be an integer for statusId").optional(),
+  rating: z.coerce
+    .number()
+    .int("Must be an integer")
+    .min(1, "Rating must be between 1 and 10")
+    .max(10, "Rating must be between 1 and 10")
+    .optional(),
+  notes: z.string().max(2000).optional(),
 });
