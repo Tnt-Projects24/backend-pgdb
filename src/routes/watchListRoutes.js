@@ -23,6 +23,6 @@ router.post(
 );
 
 router.delete("/:id", authMiddleware,removeFromWatchlist);
-router.put("/:id", authMiddleware,updateWatchlistItem);
+router.put("/:id", authMiddleware,validateRequest(addtoWatchListItemSchema),updateWatchlistItem);
 
 export default router;
