@@ -7,7 +7,7 @@ export const authMiddleware = async (req, res, next) => {
     console.log("Auth middleware reached");
 
     let token;
-    let connection;
+
 
     // Get token from Authorization header
     if (
