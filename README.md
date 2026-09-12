@@ -1,11 +1,11 @@
 
-# Secure Backend API with Authentication and CRUD Operations
+# Secure Backend API with Authentication and CRUD Operations with Postgres DB
 
 This project was created to learn and gain hands-on experience with Node.js, Express, JWT-based authentication, and modern backend development practices. It provides a secure REST API with user authentication and authorization, allowing users to register, log in, and access protected resources.
 
 The application includes complete CRUD functionality for managing movies, along with a personalized watchlist system where users can track movies they plan to watch, are currently watching, have completed, or have dropped. Users can also rate movies and add optional notes to their watchlist entries.
 
-The project incorporates modern backend development practices, including password hashing with bcryptjs, JWT authentication middleware, request validation using Zod, and centralized error handling. Oracle Express is used as the backned database. The application is designed as a practical end-to-end project for learning how to build secure, structured, and maintainable backend APIs.
+The project incorporates modern backend development practices, including password hashing with bcryptjs, JWT authentication middleware, request validation using Zod, and centralized error handling. Postgres is used as the backend database. The application is designed as a practical end-to-end project for learning how to build secure, structured, and maintainable backend APIs.
 
 ## Prerequisites
 
@@ -16,7 +16,8 @@ The project incorporates modern backend development practices, including passwor
 
 - **NodeJS**: JavaScript runtime for server-side development
 - **Express.js**: Fast, minimalist web framework for Node.js
-- **Oracle XE**: Oracle express edition
+- **Postgres**: Postgres Database
+- **Prisma**: Prisma for Prosgres
 - **Zod**: TypeScript-first schema validation library
 - **bcryptjs**: TypeScript-first schema validation library
 - **dotenv**: Environment variable management
@@ -27,7 +28,7 @@ The project incorporates modern backend development practices, including passwor
 
 1. **Clone Repository:**
    ```bash
-   git clone https://github.com/yourusername/backend-orcl.git
+   git clone https://github.com/yourusername/backend-pgdb.git
    cd backend-orcl
    
    ```
@@ -38,16 +39,8 @@ The project incorporates modern backend development practices, including passwor
 
 3. **Set up environment variables:**
    ```bash
-   DATABASE_USER=
-   DATABASE_PASSWORD=
-   DATABASE_URI=DBHOST:PORT/DB_SERVICE
-   PORT=8090
-   POOL_MIN=1
-   POOL_MAX=10
-   POOL_INCREMENT=1
-   NODE_ENV="development"
-   JWT_SECRET="" # Create Secret
-   JWT_EXPIRES_IN="7d"
+DATABASE_URL="postgres://USER:password@DBSERVER:DBPORT/DBNAME"
+
    ```
 4. **Start the server:**
    ```bash
