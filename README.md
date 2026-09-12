@@ -39,8 +39,7 @@ The project incorporates modern backend development practices, including passwor
 
 3. **Set up environment variables:**
    ```bash
-DATABASE_URL="postgres://USER:password@DBSERVER:DBPORT/DBNAME"
-
+   DATABASE_URL="postgres://USER:password@DBSERVER:DBPORT/DBNAME"
    ```
 4. **Start the server:**
    ```bash
