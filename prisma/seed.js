@@ -10,7 +10,7 @@ const movies = [
         genres: ["Sci-Fi", "Adventure", "Drama"],
         runtime: 128,
         posterUrl: "https://example.com/posters/the-last-horizon.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Midnight Protocol",
@@ -19,7 +19,7 @@ const movies = [
         genres: ["Thriller", "Action"],
         runtime: 116,
         posterUrl: "https://example.com/posters/midnight-protocol.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Echoes of Summer",
@@ -28,7 +28,7 @@ const movies = [
         genres: ["Drama", "Romance"],
         runtime: 108,
         posterUrl: "https://example.com/posters/echoes-of-summer.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Shadow District",
@@ -37,7 +37,7 @@ const movies = [
         genres: ["Crime", "Mystery", "Thriller"],
         runtime: 124,
         posterUrl: "https://example.com/posters/shadow-district.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Code Zero",
@@ -46,7 +46,7 @@ const movies = [
         genres: ["Action", "Thriller", "Technology"],
         runtime: 119,
         posterUrl: "https://example.com/posters/code-zero.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Beyond the Valley",
@@ -55,7 +55,7 @@ const movies = [
         genres: ["Adventure", "Drama"],
         runtime: 132,
         posterUrl: "https://example.com/posters/beyond-the-valley.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "The Forgotten Room",
@@ -64,7 +64,7 @@ const movies = [
         genres: ["Mystery", "Horror", "Thriller"],
         runtime: 101,
         posterUrl: "https://example.com/posters/the-forgotten-room.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Neon Skies",
@@ -73,7 +73,7 @@ const movies = [
         genres: ["Sci-Fi", "Action"],
         runtime: 137,
         posterUrl: "https://example.com/posters/neon-skies.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Letters from Paris",
@@ -82,7 +82,7 @@ const movies = [
         genres: ["Romance", "Drama"],
         runtime: 112,
         posterUrl: "https://example.com/posters/letters-from-paris.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     },
     {
         title: "Final Countdown",
@@ -91,7 +91,7 @@ const movies = [
         genres: ["Action", "Thriller"],
         runtime: 114,
         posterUrl: "https://example.com/posters/final-countdown.jpg",
-        createdBy: "69e36c12-dd0f-4801-8e7b-023999bdff82"
+        createdBy: creatorId
     }
 ];
 
