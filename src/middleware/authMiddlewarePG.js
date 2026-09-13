@@ -55,7 +55,7 @@ export const authMiddleware = async (req, res, next) => {
         if (! user) {
             return res.status(401).json({error: "Error - user doesn;t exist"});
         }
-       
+        console.log ("#########User has been added to the req ");
         req.user = user;
         // Continue to controller
         next();
