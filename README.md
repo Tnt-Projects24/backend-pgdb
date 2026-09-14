@@ -146,6 +146,7 @@ curl http://localhost:8080/movies/bulk -- To add multiple movies
 
 ### Add Movie to the watch list
 Need to login first.
+
 ```bash
 curl http://localhost:8080/watchlist
 {
@@ -153,8 +154,10 @@ curl http://localhost:8080/watchlist
   "statusId": 1,
   "rating": 5
 }
+
 ### Update Movie to the watch list
 Need to login first.
+
 ```bash
 curl http://localhost:8080/watchlist
 {
@@ -162,5 +165,12 @@ curl http://localhost:8080/watchlist
   "statusId": 1,
   "rating": 5
 }
+
+### Delete a movie from the watch list
+Need to login first.
+
+```bash
+curl http://localhost:8080/watchlist/<movieid>
+
 
 ```
