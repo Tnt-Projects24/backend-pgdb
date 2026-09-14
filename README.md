@@ -1,5 +1,5 @@
 
-# Secure Backend API with Authentication and CRUD Operations with Postgres DB
+# Secure Backend API with Authentication and CRUD Operations with PostgreSQL DB
 
 This project was created to learn and gain hands-on experience with Node.js, Express, JWT-based authentication, and modern backend development practices. It provides a secure REST API with user authentication and authorization, allowing users to register, log in, and access protected resources.
 
@@ -10,13 +10,13 @@ The project incorporates modern backend development practices, including passwor
 ## Prerequisites
 
 - **NodeJS**: Version 18 or higher
-- **Oracle Database XE**: For this project we used Oracle XE.
+- **Postres Database**: PostgreSQL 18 or higher
 
 ## Tech Stack
 
 - **NodeJS**: JavaScript runtime for server-side development
 - **Express.js**: Fast, minimalist web framework for Node.js
-- **Postgres**: Postgres Database
+- **PostgreSQL**: Postgres Database
 - **Prisma**: Prisma for Prosgres
 - **Zod**: TypeScript-first schema validation library
 - **bcryptjs**: TypeScript-first schema validation library
@@ -171,6 +171,5 @@ Need to login first.
 
 ```bash
 curl http://localhost:8080/watchlist/<movieid>
-
 
 ```
