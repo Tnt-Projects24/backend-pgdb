@@ -37,18 +37,22 @@ The project incorporates modern backend development practices, including passwor
    npm install
    ```
 
-3. **Set up environment variables:**
+3. **Set up environment variable in the .env file:**
    ```bash
    DATABASE_URL="postgres://USER:password@DBSERVER:DBPORT/DBNAME"
+
+   Note: The .env file should be under backend-pgdb/ folder.
    ```
-4. **Start the server:**
+4. **Migrate ther Required DB schema:**
+   ```bash
+   npx prisma migrate reset ## if you already created tables and wanted to overwrite them
+   npx prisma migrate dev --name intital_setup
+   npx prisma generate
+
+   ```   
+5. **Start the server:**
    ```bash
    npm run dev
-   ```
-5. **Test the APIs with swagger:**
-   ```bash
-   Access the following link and test the available APIs
-   http://localhost:8000/docs#
    ```
 6. **Docker containerization:**
  ```bash
@@ -62,7 +66,7 @@ The project incorporates modern backend development practices, including passwor
      docker compose up -d 
 
 ```
-8. **If WSL (Windows Subsystem for Linux) is used for docker:**
+7. **If WSL (Windows Subsystem for Linux) is used for docker:**
  ```bash
    - Open the Firewall and allow port forwarging, so other container can be accessed from the netwok
    - Sampe port forwarding command using Powershell:
@@ -76,23 +80,87 @@ The project incorporates modern backend development practices, including passwor
 
 ### User Registration
 ```bash
-curl http://localhost:8080/register/
+curl http://localhost:8080/register/ 
+
+POST 
+{
+  "name": "name",
+  "email": "email.emal.com",
+  "password": "plainpassword"
+}
 ```
 ### User Login
 ```bash
-curl http://localhost:8080/login/
+curl http://localhost:8080/login/ 
+
+POST 
+{
+  "email": "email.emal.com",
+  "password": "plainpassword"
+}
 ```
 ### Get movie details
 ```bash
-curl http://localhost:8080/movies/4
+curl http://localhost:8080/movies/
 ```
 
 ### Add movie - Post method
 ```bash
 curl http://localhost:8080/movies
+
+POST
+    {
+        title: "The Last Horizon",
+        overview: "A stranded astronaut races against time to reconnect with Earth before a mysterious cosmic event.",
+        release_year: 2024,
+        genres: ["TSci-Fi", "TAdventure", "TDrama"],
+        runtime: 128,
+        posterUrl: "https://test.com/posters/the-last-horizon.jpg"
+    }
+
+curl http://localhost:8080/movies/bulk -- To add multiple movies
+
+{
+  "movies": [
+    {
+        title: "The Last Horizon",
+        overview: "A stranded astronaut races against time to reconnect with Earth before a mysterious cosmic event.",
+        release_year: 2024,
+        genres: ["TSci-Fi", "TAdventure", "TDrama"],
+        runtime: 128,
+        posterUrl: "https://test.com/posters/the-last-horizon.jpg"
+    }
+,
+    {
+        title: "Midnight Protocol",
+        overview: "A cybersecurity analyst discovers a secret government program hidden inside a global network.",
+        release_year: 2023,
+        genres: ["Thriller", "Action"],
+        runtime: 116,
+        posterUrl: "https://example.com/posters/midnight-protocol.jpg",
+        createdBy: creatorId
+    }
+  ]
+}
 ```
 
 ### Add Movie to the watch list
+Need to login first.
 ```bash
 curl http://localhost:8080/watchlist
+{
+  "movieId": "df2c3a4d-ce33-4c1b-aa80-d54c897a9690",
+  "statusId": 1,
+  "rating": 5
+}
+### Update Movie to the watch list
+Need to login first.
+```bash
+curl http://localhost:8080/watchlist
+{
+  "movieId": "df2c3a4d-ce33-4c1b-aa80-d54c897a9690",
+  "statusId": 1,
+  "rating": 5
+}
+
 ```
