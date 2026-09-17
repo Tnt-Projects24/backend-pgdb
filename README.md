@@ -1,5 +1,5 @@
 
-# Secure Backend API with Authentication and CRUD Operations with PostgreSQL DB
+# Secure Backend API with Authentication and CRUD Operations with PostgreSQL DB & Redis
 
 This project was created to learn and gain hands-on experience with Node.js, Express, JWT-based authentication, and modern backend development practices. It provides a secure REST API with user authentication and authorization, allowing users to register, log in, and access protected resources.
 
