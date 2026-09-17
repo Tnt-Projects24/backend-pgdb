@@ -1,7 +1,7 @@
 import express from 'express';
 import { authMiddleware } from "../middleware/authMiddlewarePG.js";
 //import oracledb from "oracledb";
-import{showMovies,addToMovies,addMoviesBulk} from "../controllers/movieController.js";
+import{showMovies,addToMovies,addMoviesBulk,getMovie} from "../controllers/movieController.js";
 
 const router = express.Router();
 
@@ -22,6 +22,11 @@ router.post("/products", (req,res) => {
     res.json({"message" : "post"});
 } )
 
+
+router.get(
+    "/getMovie/:id",
+    getMovie
+);
 router.get(
     "/",
     showMovies

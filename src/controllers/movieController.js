@@ -1,4 +1,5 @@
 import { prisma } from "../config/pgdb.js";
+import { redis } from "../config/redis.js";
 
 const addMoviesBulk = async (req, res) => {
   try {
@@ -19,7 +20,7 @@ const addMoviesBulk = async (req, res) => {
     //   posterUrl: movie.posterUrl,
     //   createdBy: req.user.id,
     // }));
-   const movieData = movies.map((movie) => ({
+    const movieData = movies.map((movie) => ({
       ...movie,
       createdBy: req.user.id,
     }));
@@ -70,12 +71,102 @@ const addToMovies = async (req, res) => {
       data: paramMovie,
     });
 
+    // Save to Redis
+    console.log("Saving to Redis");
+    await redis.set(`movie:${movie.id}`, JSON.stringify(movie));
+
     return res.status(201).json({
       status: "Success",
       data: movie,
     });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+const getMovie = async (req, res) => {
+  try {
+    const movieId = req.params.id;
+
+    // 1. Check Redis first
+    console.log("Checking in Redis");
+
+    //const movie = await redis.get(`movie:${movieId}`);
+   let movie ="";
+   let RedisError = false;
+    try {
+       movie = await redis.get(`movie:${movieId}`);
+       console.log("Movie found in redis");
+    } catch (redisError) {
+      console.error("Redis GET failed:", redisError.message);
+      console.log("Redis is unavailable. Continuing with database...");
+      RedisError = true;
+    }
+    // Movie found in Redis
+    if (movie) {
+      console.log("Return data from Redis");
+
+      return res.status(200).json({
+        status: "Success",
+        source: "redis",
+        data: JSON.parse(movie),
+      });
+    }
+
+    // 2. Movie not found in Redis, check PostgreSQL
+    console.log("Movie not found in Redis");
+    console.log("Checking in database");
+
+    const pgmovie = await prisma.movie.findUnique({
+      where: { id: movieId },
+    });
+
+    // Movie not found in either Redis or PostgreSQL
+    if (!pgmovie) {
+      console.log("Movie not found in database");
+
+      return res.status(404).json({
+        error: "Movie not found in DB",
+      });
+    }
+
+    // Movie found in PostgreSQL
+    console.log("Found in Database");
+    //console.log("Saving to Redis");
+ console.log ("Redis status",RedisError);
+ if (!RedisError) {
+  try {
+    console.log("Saving movie to Redis");
+
+    await redis.set(
+      `movie:${pgmovie.id}`,
+      JSON.stringify(pgmovie)
+    );
+
+    console.log("Movie saved to Redis");
+
+  } catch (error) {
+    console.error("Redis SET failed:", error.message);
+    console.log("Ignoring Redis SET error. Returning movie from database.");
+  }
+} else {
+  console.log(
+    "Redis error encountered while retrieving. Not trying to save it to Redis."
+  );
+}
+
+  
+    return res.status(200).json({
+      status: "Success",
+      source: "DB",
+      data: pgmovie,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      error: "Failed to get movie",
+    });
   }
 };
 
@@ -94,7 +185,13 @@ const showMovies = async (req, res) => {
       status: "Success",
       data: movie,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      error: "Failed to retrieve movies",
+    });
+  }
 };
 
-export { showMovies, addToMovies,addMoviesBulk };
+export { showMovies, addToMovies, getMovie, addMoviesBulk };

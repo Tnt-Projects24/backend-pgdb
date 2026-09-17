@@ -5,18 +5,20 @@ This project was created to learn and gain hands-on experience with Node.js, Exp
 
 The application includes complete CRUD functionality for managing movies, along with a personalized watchlist system where users can track movies they plan to watch, are currently watching, have completed, or have dropped. Users can also rate movies and add optional notes to their watchlist entries.
 
-The project incorporates modern backend development practices, including password hashing with bcryptjs, JWT authentication middleware, request validation using Zod, and centralized error handling. Postgres is used as the backend database. The application is designed as a practical end-to-end project for learning how to build secure, structured, and maintainable backend APIs.
+The project incorporates modern backend development practices, including password hashing with bcryptjs, JWT authentication middleware, request validation using Zod, and centralized error handling. Redis is used to cache the data and Postgres is used as the backend database. The application is designed as a practical end-to-end project for learning how to build secure, structured, and maintainable backend APIs.
 
 ## Prerequisites
 
 - **NodeJS**: Version 18 or higher
 - **Postres Database**: PostgreSQL 18 or higher
+- **Redis**: Redis:7 or higher -- For Caching
 
 ## Tech Stack
 
 - **NodeJS**: JavaScript runtime for server-side development
 - **Express.js**: Fast, minimalist web framework for Node.js
 - **PostgreSQL**: Postgres Database
+- **Redis**: Redis cache
 - **Prisma**: Prisma for Prosgres
 - **Zod**: TypeScript-first schema validation library
 - **bcryptjs**: TypeScript-first schema validation library
@@ -40,6 +42,7 @@ The project incorporates modern backend development practices, including passwor
 3. **Set up environment variable in the .env file:**
    ```bash
    DATABASE_URL="postgres://USER:password@DBSERVER:DBPORT/DBNAME"
+   REDIS_URL=redis://:Password@Redishost:6379
 
    Note: The .env file should be under backend-pgdb/ folder.
    ```
@@ -143,6 +146,33 @@ curl http://localhost:8080/movies/bulk -- To add multiple movies
   ]
 }
 ```
+### Movies/getMovie/<movieid> API
+To retrieve a single movie
+![Screenshot - Redis Cache Hit](.RedisCacheHitAPIData.png)
+
+### Movies/getMovie/<movieid> API
+To retrieve a single movie
+
+Screenshot showing data is coming from Redis
+![Screenshot - Redis Cache Hit](.RedisCacheHitAPIData.png)
+
+Console log showing data is coming from Redis
+![Screenshot - Redis Cache Hit](.RedisDBHit-TerminalLog.jpg)
+
+Screenshot showing data is coming from Database
+![Screenshot - Redis Cache Hit](.RedisDBHitAPIData.png)
+
+Console log showing data is coming from Database
+![Screenshot - Redis Cache Hit](.RedisDBHit-TerminalLog.png)
+
+
+```bash
+curl http://localhost:8080/watchlist
+{
+  "movieId": "df2c3a4d-ce33-4c1b-aa80-d54c897a9690",
+  "statusId": 1,
+  "rating": 5
+}
 
 ### Add Movie to the watch list
 Need to login first.
@@ -162,7 +192,7 @@ Need to login first.
 curl http://localhost:8080/watchlist
 {
   "movieId": "df2c3a4d-ce33-4c1b-aa80-d54c897a9690",
-  "statusId": 1,
+  "statusId": 3,
   "rating": 5
 }
 
