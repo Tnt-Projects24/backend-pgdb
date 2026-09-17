@@ -1,7 +1,7 @@
 
 # Secure Backend API with Authentication and CRUD Operations with PostgreSQL DB & Redis
 
-This project was created to learn and gain hands-on experience with Node.js, Express, JWT-based authentication, and modern backend development practices. It provides a secure REST API with user authentication and authorization, allowing users to register, log in, and access protected resources.
+This project was created to learn and gain hands-on experience with Node.js, Express, JWT-based authentication, and modern backend development practices with Redis cache. It provides a secure REST API with user authentication and authorization, allowing users to register, log in, and access protected resources.
 
 The application includes complete CRUD functionality for managing movies, along with a personalized watchlist system where users can track movies they plan to watch, are currently watching, have completed, or have dropped. Users can also rate movies and add optional notes to their watchlist entries.
 
@@ -147,33 +147,24 @@ curl http://localhost:8080/movies/bulk -- To add multiple movies
 }
 ```
 ### Movies/getMovie/<movieid> API
-To retrieve a single movie
-![Screenshot - Redis Cache Hit](.RedisCacheHitAPIData.png)
+To retrieve a single movie<br>
+curl http://localhost:8080/movies/getMovie/1d77fd63-1d2f-47e1-88c4-13bcce38ebe8
 
-### Movies/getMovie/<movieid> API
-To retrieve a single movie
 
 Screenshot showing data is coming from Redis
-![Screenshot - Redis Cache Hit](.RedisCacheHitAPIData.png)
+![Screenshot - Redis Cache Hit](./static/RedisCacheHitAPIData.png)
 
 Console log showing data is coming from Redis
-![Screenshot - Redis Cache Hit](.RedisDBHit-TerminalLog.jpg)
+![Screenshot - Redis Cache Hit](./static/RedisDBHit-TerminalLog.jpg)
 
 Screenshot showing data is coming from Database
-![Screenshot - Redis Cache Hit](.RedisDBHitAPIData.png)
+![Screenshot - Redis Cache Hit](./static/RedisDBHitAPIData.png)
 
 Console log showing data is coming from Database
-![Screenshot - Redis Cache Hit](.RedisDBHit-TerminalLog.png)
+![Screenshot - Redis Cache Hit](./static/RedisDBHit-TerminalLog.jpg)
 
 
 ```bash
-curl http://localhost:8080/watchlist
-{
-  "movieId": "df2c3a4d-ce33-4c1b-aa80-d54c897a9690",
-  "statusId": 1,
-  "rating": 5
-}
-
 ### Add Movie to the watch list
 Need to login first.
 
