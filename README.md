@@ -155,7 +155,7 @@ Screenshot showing data is coming from Redis
 ![Screenshot - Redis Cache Hit](./static/RedisCacheHitAPIData.png)
 
 Console log showing data is coming from Redis
-![Screenshot - Redis Cache Hit](./static/RedisDBHit-TerminalLog.jpg)
+![Screenshot - Redis Cache Hit](./static/RedisCacheHit-TerminalLog.jpg)
 
 Screenshot showing data is coming from Database
 ![Screenshot - Redis Cache Hit](./static/RedisDBHitAPIData.png)
